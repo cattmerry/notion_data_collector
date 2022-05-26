@@ -1,4 +1,5 @@
 import pandas as pd
+from typing import List
 
 
 class NotionDataParser:
@@ -9,7 +10,7 @@ class NotionDataParser:
     """
 
     @staticmethod
-    def parse_database(table_data: list) -> pd.DataFrame:
+    def parse_database(table_data: List[dict]) -> pd.DataFrame:
         """
         database api response 데이터를 받아 pandas dataframe으로 변환하여 리턴한다.
         database 컬럼들의 타입에 따라 분기 처리

@@ -5,7 +5,9 @@ from utils.logger import logger_setting
 
 class NotionClient:
 
-    def __init__(self, auth_token: str, notion_version: str = "2022-02-22"):
+    def __init__(self,
+                 auth_token: str,
+                 notion_version: str = "2022-02-22"):
         """
         Notion api 클라이언트
         :param auth_token: api 키
@@ -102,7 +104,7 @@ class NotionClient:
         return response
 
     def call_block_children(self,
-                            block_id) -> dict:
+                            block_id: str) -> dict:
         """
         notion Retrieve block children api call 하기 위한 함수
         https://developers.notion.com/reference/get-block-children

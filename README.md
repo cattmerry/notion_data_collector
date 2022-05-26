@@ -27,6 +27,15 @@
 └── requirements.txt            필요한 파이썬 라이브러리 정의
 ```
 ***
+## 로직 설명
+1. 페이지 url과 api키로 객체 생성
+   1. 페이지 url로 search api를 통해 페이지 id 추출
+   2. 페이지 id로 block chlidren api를 통해 페이지내의 모든 데이터베이스 id 추출
+2. 객체의 execute 함수 call하여 제너레이터로 리턴
+   1. query database api를 통해 데이터베이스 오브젝트의 데이터를 가져옴
+   2. 가져온 데이터를 type별로 파싱하여 dataframe으로 변환
+   3. 변환된 dataframe 리턴
+***
 ## Example
 필요 라이브러리를 설치합니다.  
 ```

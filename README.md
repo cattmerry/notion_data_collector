@@ -12,7 +12,7 @@
 ## 사용 방법
 1. 데이터를 가져올 노션 페이지의 url과 api키를 준비합니다.
 2. notion_data_collector.py의 NotionData 클래스에 api키와 페이지 url을 파라메터로 넣어 객체를 만듭니다.
-3. 객체의 execute 함수를 call하면 페이지내(하위 페이지 포함)의 모든 데이터베이스 오브젝트들을를 pandas dataframe으로 변환하여 제너레이터로 리턴해줍니다.
+3. 객체의 execute 함수를 call하면 페이지내(하위 페이지 포함)의 모든 데이터베이스 오브젝트들을 pandas dataframe으로 변환하여 제너레이터로 리턴해줍니다.
 4. 새로운 페이지의 데이터를 추출하고 싶다면 객체를 새로 생성해야 합니다.
 ***
 ## Directory 구조

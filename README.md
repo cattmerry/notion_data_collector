@@ -24,7 +24,6 @@
 │   ├── notion_client.py        Notion api 클라이언트 모듈
 │   └── notion_data_parser.py   notion data를 파싱하기 위한 모듈
 ├── notion_data_collector.py    메인 기능을 수행할 모듈
-├── test_notion_data.py         간단한 테스트 예제
 └── requirements.txt            필요한 파이썬 라이브러리 정의
 ```
 ***

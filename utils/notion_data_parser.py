@@ -14,6 +14,7 @@ class NotionDataParser:
         """
         database api response 데이터를 받아 pandas dataframe으로 변환하여 리턴한다.
         database 컬럼들의 타입에 따라 분기 처리
+        데이터에 다수의 값이 있을 경우 comma(,)로 합쳐 값을 대입한다.
         추후 notion api의 업데이트 혹은 예상치 못한 타입이 추가될 경우를 대비하여 정의되지 않은 타입이 들어올 경우 파싱하지 않고 원본 그대로 입력한다.
         :param table_data: database api response data
         :return: 변환된 dataframe
@@ -43,7 +44,7 @@ class NotionDataParser:
                     case "email" | "url" | "checkbox" | "number" | "phone_number" | "created_time" | "last_edited_time":
                         parse_dict[raw_key] = raw_data
 
-                    case "multi_select" | "people":
+                    case "multi_select" | "people":  # 다수의 값이 있을 경우 comma(,)로 합쳐 값을 대입한다.
                         temp_list = []
                         for data in raw_data:
                             temp_list.append(data["name"])
@@ -55,13 +56,13 @@ class NotionDataParser:
                     case "formula":
                         parse_dict[raw_key] = raw_data[raw_data['type']]
 
-                    case "relation":
+                    case "relation":  # 다수의 값이 있을 경우 comma(,)로 합쳐 값을 대입한다.
                         temp_list = []
                         for data in raw_data:
                             temp_list.append(data["id"])
                         parse_dict[raw_key] = ",".join(temp_list)
 
-                    case "rollup":
+                    case "rollup":  # 다수의 값이 있을 경우 comma(,)로 합쳐 값을 대입한다.
                         temp_list = []
                         for data in raw_data["array"]:
                             rollup_type = data["type"]
@@ -69,13 +70,13 @@ class NotionDataParser:
                             temp_list.append(rollup_data[0]["plain_text"])
                         parse_dict[raw_key] = ",".join(temp_list)
 
-                    case "files":
+                    case "files":  # file type의 경우 파일 url로 표기힌다. 다수의 값이 있을 경우 comma(,)로 합쳐 값을 대입한다.
                         temp_list = []
                         for data in raw_data:
                             temp_list.append(data[f"{data['type']}"]["url"])
                         parse_dict[raw_key] = ",".join(temp_list)
 
-                    case "date":
+                    case "date":  # date type의 경우 여러날짜가 존재할 수 있기 때문에 사용자가 만든 컬럼에 접미사를 붙여 컬럼을 분할한다.
                         for k, v in raw_data.items():
                             parse_dict[raw_key + "_" + k] = v
 
